@@ -1,0 +1,1 @@
+int recepteur(int * mot_code);
