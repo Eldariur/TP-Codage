@@ -29,10 +29,9 @@ int main(){
 			exit(EXIT_SUCCESS);
 		case 2: testHDBN();
 			exit(EXIT_SUCCESS);
-		case 3: mainAleat();
+		case 3: testAleat();
 			exit(EXIT_SUCCESS);
-		case 4:
-			printf("WIP\n");
+		case 4: printf("WIP\n");
 			exit(EXIT_SUCCESS);
 	}
 

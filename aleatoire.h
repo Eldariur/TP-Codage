@@ -1,1 +1,1 @@
-void mainAleat();
+void testAleat();
