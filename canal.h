@@ -1,1 +1,1 @@
-int canal(int * mot_code);
+int * canal(int * mot_code);

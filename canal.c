@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include "canal.h"
 
-int canal(int * mot_code){
-	return(1);
+
+/* Canal Idéal */
+int * canal(int * mot_code){
+	printf("Passage du mot code dans le canal..\n");
+	afficher_separateur();
+	return mot_code;
 }
