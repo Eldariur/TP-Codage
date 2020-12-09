@@ -16,13 +16,13 @@ char xor(char c1, char c2){
    return c1_c2 == '1' || _c1c2 == '1' ? '1' : '0';
 }
 
-char * generer_code_longeur_maximale(char registre_initial[], char polynome_generateur[]){
+char * generer_code_longeur_maximale(char registre_initial[], char polynome_generateur[], int longeur_sequence){
    int longeur_registre_init = strlen(registre_initial);
    int longeur_registre_totale = longeur_registre_init*longeur_registre_init-1;
    char registres[longeur_registre_totale][longeur_registre_init];
    char resultat[longeur_registre_totale];
    resultat[0] = registre_initial[longeur_registre_init - 1];
-   char * retour = malloc(sizeof(char) * longeur_registre_totale);
+   char * retour = malloc(sizeof(char) * longeur_sequence);
    strcpy(registres[0], registre_initial);
 
    char bits_a_comparer[longeur_registre_init];
@@ -30,8 +30,6 @@ char * generer_code_longeur_maximale(char registre_initial[], char polynome_gene
 
    char res_xor;
    int ou_commencer;
-
-   printf("Ligne 1 : %s\n", registres[0]);
 
    for(int i = 1; i < longeur_registre_totale; i++){
       //on recopie la ligne du dessus en décalant de 1
@@ -58,7 +56,7 @@ char * generer_code_longeur_maximale(char registre_initial[], char polynome_gene
       resultat[i] = registres[i][longeur_registre_init-1];
    }
 
-   for(int i = 0; i < longeur_registre_totale; i++) {
+   for(int i = 0; i < longeur_sequence; i++) {
       retour[i] = resultat[i];
    }
    return retour;
@@ -78,9 +76,13 @@ void testCodeLongeurMax(){
    printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
    scanf("%s", polynome_generateur);
 
-   sequence_generee = generer_code_longeur_maximale(registre_initial, polynome_generateur);
+   printf("Longeur de la séquence a générer :");
+   scanf("%d", &longeur_sequence);
+
+   sequence_generee = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
    printf("Séquence générée : %s\n", sequence_generee);
    free(sequence_generee);
+   afficher_separateur();
 }
 
 void testCodeurDeGold(){
@@ -91,30 +93,40 @@ void testCodeurDeGold(){
    int longeur_sequence;
 
    afficher_separateur();
-   printf("Creation du premier code a Longeur Maximale :");
+   printf("Creation du premier code a Longeur Maximale :\n");
    printf("Registre d'initialisation : ");
    scanf("%s", registre_initial);
    printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
    scanf("%s", polynome_generateur);
-   sequence_generee1 = generer_code_longeur_maximale(registre_initial, polynome_generateur);
+   printf("Longeur de la séquence a générer :");
+   scanf("%d", &longeur_sequence);
+   sequence_generee1 = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
 
    afficher_separateur();
-   printf("Creation du deuxieme code a Longeur Maximale :");
+   printf("Creation du deuxieme code a Longeur Maximale :\n");
    printf("Registre d'initialisation : ");
    scanf("%s", registre_initial);
    printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
    scanf("%s", polynome_generateur);
-   sequence_generee2 = generer_code_longeur_maximale(registre_initial, polynome_generateur);
+   sequence_generee2 = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
 
    printf("Séquence générée 1 : %s\n", sequence_generee1);
    printf("Séquence générée 2 : %s\n", sequence_generee2);
 
-   printf("Longeur de la séquence a générer :");
-   scanf("%d", &longeur_sequence);
+   afficher_separateur();
+   printf("Génération d'un code de Gold de longeur %d\n", longeur_sequence);
 
+   char code_gold[longeur_sequence];
+
+   for(int i = 0; i < longeur_sequence; i++){
+      code_gold[i] = ((sequence_generee1[i] - '0' + sequence_generee2[i] - '0') % 2) + '0';
+   }
+
+   printf("Code gold obtenu : %s\n", code_gold);
 
    free(sequence_generee1);
    free(sequence_generee2);
+   afficher_separateur();
 }
 
 void testAleat(){
