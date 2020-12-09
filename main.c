@@ -27,7 +27,26 @@ int main(){
 	/* ========== Initialisation ============= */
 	puts( " ====================== DEBUT DE PROGRAMME ========================= \n" ) ;
 
-	printf("(pour tout passer et aller a HDBn, entrer -1)\n");
+	printf("Code a éxecuter :\n");
+	printf("1 - Code d'étalement\n");
+	printf("2 - Codeur HDBn\n");
+	printf("3 - Générateur pseudo-aléatoire\n");
+	printf("4 - Agent Life Cycle\n");
+	int choix = 0;
+	do {
+		scanf("%d", &choix);
+	} while(choix < 1 || choix > 4);
+
+	switch(choix){
+		case 2: testHDBN();
+			exit(EXIT_SUCCESS);
+		case 3: mainAleat();
+			exit(EXIT_SUCCESS);
+		case 4:
+			printf("WIP\n");
+			exit(EXIT_SUCCESS);
+	}
+
 	printf("Veuillez rentrer le nombre d'utilisateurs : ");
 
 	scanf("%d",&nb_utilisateur);

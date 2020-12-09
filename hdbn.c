@@ -3,6 +3,8 @@
 #include "hdbn.h"
 #include "affichage.h"
 
+#define TAILLE_CODE 15
+
 void encodage_HDBn(int n, int taille, int entree[taille], int sortie[taille], int P[taille], int N[taille]){
 	int last_altern = 1;
 	int last_1_bit = 1;
@@ -125,7 +127,6 @@ void decodage_HDBn(int n, int taille, int entree[taille], int P[taille], int N[t
 		//HDBN tout sauf 1
 		default:
 			for(int i = 0; i < taille; i++) {
-				printf("entree[%d]: %d\n", i, entree[i]);
 				//Si le bit est un 0, alors tout va bien
 				if(entree[i] == 0)
 					sortie[i] = 0;
@@ -157,24 +158,44 @@ void decodage_HDBn(int n, int taille, int entree[taille], int P[taille], int N[t
 }
 
 void testHDBN(){
-	int code_entree[14] = {1,0,0,0,0,1,1,0,0,0,0,0,1,0};
-	int code_sortie[14];
-	int code_decode[14];
-	int P[14];
-	int N[14];
-	int erreur[14];
-	encodage_HDBn(HDBN3, 14, code_entree, code_sortie, P, N);
-	decodage_HDBn(HDBN3, 14, code_sortie, P, N, code_decode, erreur);
+
+	int code_entree[TAILLE_CODE];
+	int code_sortie[TAILLE_CODE];
+	int code_decode[TAILLE_CODE];
+	int P[TAILLE_CODE];
+	int N[TAILLE_CODE];
+	int erreur[TAILLE_CODE];
+
+	afficher_separateur();
+	printf("Test du codage HDBn :\n");
+	printf("Suite de 1 et de 0 a encoder (-1 pour utiliser l'exemple): ");
+	int indice = 0;
+	int buffer;
+	do {
+		scanf("%d", &buffer);
+		code_entree[indice] = buffer;
+		indice++;
+	} while(indice != 15 && buffer != -1);
+
+	if(buffer == -1){
+		int code_exemple[TAILLE_CODE] = {1,0,0,0,0,1,1,0,0,0,0,0,1,0,1};
+		for(int i = 0; i < TAILLE_CODE; i++) {
+			code_entree[i] = code_exemple[i];
+		}
+	}
+
+	encodage_HDBn(HDBN3, TAILLE_CODE, code_entree, code_sortie, P, N);
+	decodage_HDBn(HDBN3, TAILLE_CODE, code_sortie, P, N, code_decode, erreur);
 	printf("Code de départ\t\t\t\t\t: ");
-	afficher_tab_int(code_entree, 14);
+	afficher_tab_int(code_entree, TAILLE_CODE);
 	printf("Code en sortie du codeur\t\t\t: ");
-	afficher_tab_int(code_sortie, 14);
+	afficher_tab_int(code_sortie, TAILLE_CODE);
 	printf("P\t\t\t\t\t\t: ");
-	afficher_tab_int(P, 14);
+	afficher_tab_int(P, TAILLE_CODE);
 	printf("N\t\t\t\t\t\t: ");
-	afficher_tab_int(N, 14);
+	afficher_tab_int(N, TAILLE_CODE);
 	printf("Code en sortie du decodeur\t\t\t: ");
-	afficher_tab_int(code_decode, 14);
+	afficher_tab_int(code_decode, TAILLE_CODE);
 	printf("Erreur de transmission (rien normalement)\t: ");
-	afficher_tab_int(erreur, 14);
+	afficher_tab_int(erreur, TAILLE_CODE);
 }
