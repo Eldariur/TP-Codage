@@ -134,6 +134,8 @@ int main(){
 		afficher_tab_int(mot_code, taille*N);
 
 		afficher_separateur();
+
+      recepteur(mot_code,sequence,taille,N);
 	}
 
 	/* ======================= */
