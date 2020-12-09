@@ -129,6 +129,65 @@ void testCodeurDeGold(){
    afficher_separateur();
 }
 
+void testCodeurJPL(){
+   char registre_initial[20];
+   char polynome_generateur[20];
+   char * sequence_generee1;
+   char * sequence_generee2;
+   char * sequence_generee3;
+   int longeur_sequence;
+
+   afficher_separateur();
+   printf("Creation du premier code a Longeur Maximale :\n");
+   printf("Registre d'initialisation : ");
+   scanf("%s", registre_initial);
+   printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
+   scanf("%s", polynome_generateur);
+   printf("Longeur de la séquence a générer :");
+   scanf("%d", &longeur_sequence);
+   sequence_generee1 = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
+
+   afficher_separateur();
+   printf("Creation du deuxieme code a Longeur Maximale :\n");
+   printf("Registre d'initialisation : ");
+   scanf("%s", registre_initial);
+   printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
+   scanf("%s", polynome_generateur);
+   sequence_generee2 = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
+
+   afficher_separateur();
+   printf("Creation du troisieme code a Longeur Maximale :\n");
+   printf("Registre d'initialisation : ");
+   scanf("%s", registre_initial);
+   printf("Polynome Generateur (ex: 1+x+x3 => 1101) : ");
+   scanf("%s", polynome_generateur);
+   sequence_generee3 = generer_code_longeur_maximale(registre_initial, polynome_generateur, longeur_sequence);
+
+   printf("Séquence générée 1 : %s\n", sequence_generee1);
+   printf("Séquence générée 2 : %s\n", sequence_generee2);
+   printf("Séquence générée 2 : %s\n", sequence_generee3);
+
+   afficher_separateur();
+   printf("Génération d'un code JPL de longeur %d\n", longeur_sequence);
+
+   char code_JPL[longeur_sequence];
+
+   for(int i = 0; i < longeur_sequence; i++){
+      code_JPL[i] = ((sequence_generee1[i] - '0' + sequence_generee2[i] - '0') % 2) + '0';
+   }
+
+   for(int i = 0; i < longeur_sequence; i++){
+      code_JPL[i] = ((code_JPL[i] - '0' + sequence_generee3[i] - '0') % 2) + '0';
+   }
+
+   printf("Code JPL obtenu : %s\n", code_JPL);
+
+   free(sequence_generee1);
+   free(sequence_generee2);
+   free(sequence_generee3);
+   afficher_separateur();
+}
+
 void testAleat(){
    afficher_separateur();
    printf("Test a effectuer :\n");
@@ -145,7 +204,7 @@ void testAleat(){
 			exit(EXIT_SUCCESS);
 		case 2: testCodeurDeGold();
 			exit(EXIT_SUCCESS);
-		case 3: printf("WIP\n");
+		case 3: testCodeurJPL();
 			exit(EXIT_SUCCESS);
 	}
 }
