@@ -27,7 +27,14 @@ int main(){
 	/* ========== Initialisation ============= */
 	puts( " ====================== DEBUT DE PROGRAMME ========================= \n" ) ;
 
+	printf("(pour tout passer et aller a HDBn, entrer -1)\n");
 	printf("Veuillez rentrer le nombre d'utilisateurs : ");
+
+	scanf("%d",&nb_utilisateur);
+	if(nb_utilisateur == -1){
+		testHDBN();
+		exit(EXIT_SUCCESS);
+	}
 	taille = taille_mat_selon_user(nb_utilisateur);
 
 	/* ======================= */
@@ -112,9 +119,9 @@ int main(){
 			/*On repete N fois la sequence en appliquant le mot dessus*/
 			for(int j = i*taille; j < (i * taille + taille); j++) {
 				if(mot[i]){
-					mot_code[j] = sequence[j % taille];
+					mot_code[j] = sequence[j % taille] == 1 ? 1 : 0;
 				} else {
-					mot_code[j] = -1 * sequence[j % taille];
+					mot_code[j] = -1 * sequence[j % taille] == 1 ? 1 : 0;
 				}
 			}
 		}
