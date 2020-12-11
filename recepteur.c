@@ -12,6 +12,7 @@ int recepteur(int * mot_code, int * sequence, int taille, int N){
 
 	int vrai = 1;
 	int mot_original[N];
+	int j = 0;
 	/*Boucle de déchiffrage */
 
 		printf("Je suis le recepteur. Je recois le mot code\n");
@@ -19,13 +20,9 @@ int recepteur(int * mot_code, int * sequence, int taille, int N){
 		printf("Dechiffrage du mot code en cours...\n");
 
 		for(int i = 0; i < N; i++) {
-			/*On repete N fois la sequence en appliquant le mot dessus*/
-			for(int j = i*taille; j < (i * taille + taille); j++) {
-
-				if(mot_code[j] != sequence[j % taille]){
-					vrai = 0;
-				}
-
+					
+			if(mot_code[j] != sequence[j % taille]){
+				vrai = 0;
 			}
 
 			if(vrai)
@@ -34,6 +31,7 @@ int recepteur(int * mot_code, int * sequence, int taille, int N){
 				mot_original[i] = 0;
 
 			vrai = 1;
+			j = i*taille;
 		}
 
 
